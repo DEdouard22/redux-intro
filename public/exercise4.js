@@ -9,7 +9,22 @@ let defaultTodos = {
 }
 
 // write a reducer that updated the todos array whenever a ADD_TODO action is dispatched
-let reducer4 = (state = defaultTodos, action) => defaultTodos;
+let reducer4 = (state = defaultTodos, action) => {
+	if (action.type == "ADD_TODO") {
+		let { todoText } = action; //desctructure? let todoText = action.todText;
+
+		//"wrong way" Push into an array This is not good because we are changing the Redux state
+		//state.todos.push(todoText);
+		//return state;
+		//correct way is using concat instead of push. Concat create a new array before altering. 
+		return {
+			todos: state.todos.concat(todoText)
+		};
+		
+	}
+
+	return state;
+};
 
 let store4 = Redux.createStore(reducer4);
 
